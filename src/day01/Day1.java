@@ -23,9 +23,14 @@ public class Day1 {
         
         int currentPosition = 0;
         char step;
+        boolean wasInBasement = false;
         
         for (int i = 0; i < directions.length(); i++) {
             step = directions.charAt(i);
+            if (currentPosition == -1 && !wasInBasement) {
+            	wasInBasement = true;
+            	System.out.println(i);
+            }
             if (step == '(') {
                 currentPosition += 1;
             }
