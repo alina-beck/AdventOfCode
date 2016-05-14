@@ -10,7 +10,7 @@ public class Day1 {
 	public static void main(String[] args) throws IOException {
         String directions;
         
-        URL path = Day1.class.getResource("input.txt");
+        URL path = Day1.class.getResource("input01.txt");
 		Scanner scanner = new Scanner(new File(path.getFile()));
         if (scanner.hasNext()) {
         	directions = scanner.nextLine();
