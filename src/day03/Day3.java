@@ -24,29 +24,51 @@ public class Day3 {
         	throw new IOException("no input");
         }
         
-    	int x = 0;
-    	int y = 0;
+    	int santaX = 0;
+    	int santaY = 0;
+    	int roboX = 0;
+    	int roboY = 0;
+    	
+    	boolean isSantasTurn = true;
     	Set<List<Integer>> visitedPositions = new HashSet<>();
+    	visitedPositions.add(Arrays.asList(0, 0));
         
         for (int i = 0; i < directions.length(); i++) {
-        	visitedPositions.add(Arrays.asList(x, y));
-        	
         	char step = directions.charAt(i);
-        	switch (step) {
-        		case '>':
-        			x++;
-        			break;
-        		case '<':
-        			x--;
-        			break;
-        		case'^':
-        			y++;
-        			break;
-        		case 'v':
-        			y--;
-        			break;
+        	
+        	if (isSantasTurn) {
+        		int[] newPosition = takeStep(step, santaX, santaY);
+        		santaX = newPosition[0];
+        		santaY = newPosition[1];
+        		visitedPositions.add(Arrays.asList(santaX, santaY));
+        		isSantasTurn = false;
         	}
+        	else {
+        		int[] newPosition = takeStep(step, roboX, roboY);
+        		roboX = newPosition[0];
+        		roboY = newPosition[1];
+        		visitedPositions.add(Arrays.asList(roboX, roboY));
+        		isSantasTurn = true;
+        	}	
         }
         System.out.println("Houses visited: " + visitedPositions.size());
+	}
+	
+	public static int[] takeStep (char step, int x, int y) {
+		switch (step) {
+			case '>':
+				x++;
+				break;
+			case '<':
+				x--;
+				break;
+			case'^':
+				y++;
+				break;
+			case 'v':
+				y--;
+				break;
+    	}
+		return new int[] {x, y};
 	}
 }
